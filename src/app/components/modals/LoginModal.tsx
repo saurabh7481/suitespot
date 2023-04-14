@@ -51,29 +51,12 @@ const LoginModal = () => {
 		} finally {
 			setIsLoading(false);
 		}
-		// setIsLoading(true);
-		// signIn("credentials", {
-		// 	...data,
-		// 	redirect: true,
-        //     // callbackUrl: '/success'
-		// }).then((callback) => {
-        //     console.log('here')
-		// 	setIsLoading(false);
-		// 	if (callback?.ok) {
-        //         console.log('logged in')
-		// 		toast.success("Logged In");
-		// 		router.refresh();
-
-		// 		registerModal.onClose();
-		// 	}
-
-		// 	if (callback?.error) {
-		// 		toast.error(callback?.error);
-		// 	}
-		// }).catch(err => {
-        //     console.log(err)
-        // })
 	};
+
+	const toggleModal = useCallback(() => {
+		loginModal.onClose()
+		registerModal.onOpen()
+	}, [loginModal, registerModal])
 
 	const bodyContent = (
 		<div className="flex flex-col gap-4">
@@ -123,9 +106,9 @@ const LoginModal = () => {
             "
 			>
 				<p>
-					Already have an account?
+					First time on suitespot?
 					<span
-						onClick={() => {}}
+						onClick={toggleModal}
 						className="
                   text-neutral-800
                   cursor-pointer 
@@ -133,7 +116,7 @@ const LoginModal = () => {
                 "
 					>
 						{" "}
-						Log in
+						Create an account
 					</span>
 				</p>
 			</div>
