@@ -4,6 +4,11 @@ import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
 import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
+import LoginModal from "./components/modals/LoginModal";
+import getCurrentUser from "./actions/getCurrentUser";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
 	title: "Stay.io",
@@ -14,18 +19,20 @@ const font = Nunito({
 	subsets: ["latin"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const currentUser = await getCurrentUser()
 	return (
 		<html lang="en">
 			<body className={font.className}>
 				<ClientOnly>
-					<ToasterProvider/>
-					<RegisterModal/>
-					<Navbar />
+					<ToasterProvider />
+					<LoginModal />
+					<RegisterModal />
+					<Navbar currentUser={currentUser}/>
 				</ClientOnly>
 
 				{children}
