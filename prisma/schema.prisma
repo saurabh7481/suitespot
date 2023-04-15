@@ -20,6 +20,7 @@ model User {
   hashedPassword String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  favoriteIds    String?
 
   accounts     Account[]
   listings     Listing[]
