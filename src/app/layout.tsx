@@ -10,6 +10,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import { SessionProvider } from "next-auth/react";
 import RentModal from "./components/modals/RentModal";
+import SearchModal from "./components/modals/SearchModal";
 
 export const metadata = {
 	title: "Stay.io",
@@ -34,6 +35,7 @@ export default async function RootLayout({
 					<LoginModal />
 					<RegisterModal />
 					<RentModal />
+					<SearchModal />
 					<Navbar currentUser={currentUser} />
 				</ClientOnly>
 				<div className="pb-20 pt-28">{children}</div>
